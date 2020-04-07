@@ -7,7 +7,10 @@ This program requires the tkinter module version 8.6+.
 # Installation of tkinter:
 	Windows:
 		Download and install ActiveTCL from http://www.activestate.com/products/activetcl/tcl-tk-modules/
-
+	
+	Linux (Ubuntu):
+		From Cli: sudo apt install python3-tk	
+	
 	Linux (Debian):
 		From command line run: sudo apt-get install python3-tk
 
