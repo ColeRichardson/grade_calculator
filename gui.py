@@ -12,6 +12,11 @@ class GUI:
         self.widgets = []
         self.marks = []
         self.weights = []
+        self.avg_button = tk.Button(text="calculate average")
+        self.add_button = tk.Button(text="add Assignment")
+        self.setup_window()
+
+    def setup_window(self):
 
         for i in range(self.num):
             tk.Label(self.root, text='Assessment Name', background='white', padx=10, pady=10).grid(row=i)
@@ -36,11 +41,21 @@ class GUI:
             print(type(mark))
             self.marks.append(mark)
 
-        tk.Button(text="calculate average", command=self.get_avg).grid(row=self.num+1, column=1)
+        #calculate the average button
+        self.avg_button.destroy()
+        self.avg_button = tk.Button(text="calculate average", command=self.get_avg)
+        self.avg_button.grid(row=self.num+1, column=1)
+
+        #add a new assignment box
+        self.add_button.destroy()
+        self.add_button = tk.Button(text="add Assignment", command=self.addField)
+        self.add_button.grid(row=self.num+1, column=2)
+
         self.root.mainloop()
 
     def addField(self):
-        pass
+        self.num += 1
+        self.setup_window()
 
     def delField(self):
         pass
