@@ -14,6 +14,7 @@ class GUI:
         self.weights = []
         self.avg_button = tk.Button(text="calculate average")
         self.add_button = tk.Button(text="add Assignment")
+        self.delete_button = tk.Button(text="delete Assignment")
         self.setup_window()
 
     def setup_window(self):
@@ -51,6 +52,11 @@ class GUI:
         self.add_button = tk.Button(text="add Assignment", command=self.addField)
         self.add_button.grid(row=self.num+1, column=2)
 
+        #delete an assignment box
+        self.delete_button.destroy()
+        self.delete_button = tk.Button(text="Delete Assignment", command=self.delField)
+        self.delete_button.grid(row=self.num+1, column=3)
+
         self.root.mainloop()
 
     def addField(self):
@@ -58,7 +64,8 @@ class GUI:
         self.setup_window()
 
     def delField(self):
-        pass
+        self.num -= 1
+        self.setup_window()
 
     def create_print_text(self, avg, weightt):
         #tk.Label(text=str(self.get_avg()), row=self.num+2, column=self.num+1)
