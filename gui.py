@@ -1,4 +1,6 @@
 import tkinter as tk
+from assignment import Assignment
+
 
 class GUI:
 
@@ -6,41 +8,48 @@ class GUI:
         self.root = tk.Tk()
         self.root.title("UTM Grade Calculator")
         self.root.geometry("1000x700")
-        self.root.resizable(False, False)
         self.root.configure(background='black')
+        self.assignments = []
         self.num = 5
-        self.widgets = []
-        self.marks = []
-        self.weights = []
         self.avg_button = tk.Button(text="calculate average")
         self.add_button = tk.Button(text="add Assignment")
         self.delete_button = tk.Button(text="delete Assignment")
+        for i in range(self.num):
+            temp = Assignment(self.root)
+            self.assignments.append(temp)
         self.setup_window()
 
     def setup_window(self):
+        while len(self.assignments) < self.num:
+            temp = Assignment(self.root)
+            self.assignments.append(temp)
 
         for i in range(self.num):
             tk.Label(self.root, text='Assessment Name', background='white', padx=10, pady=10).grid(row=i)
 
-        for i in range(self.num):
-            tk.Entry(self.root, bg='orange').grid(row=i, column=1)
+        k = 0
+        for ass in self.assignments:
+            ass.name = tk.Entry(self.root, bg='orange')
+            ass.name.grid(row=k, column=1)
+            k+=1
 
         for i in range(self.num):
             tk.Label(self.root, text='Weight %', background='white', padx=10, pady=10).grid(row=i, column=2)
 
-        for i in range(self.num):
-            weight = tk.Entry(self.root, bg='orange')
-            weight.grid(row=i, column=3)
-            print(type(weight))
-            self.weights.append(weight)
+        k = 0
+        for ass in self.assignments:
+            ass.weight = tk.Entry(self.root, bg='orange')
+            ass.weight.grid(row=k, column=3)
+            k+=1
+            
         for i in range(self.num):
             tk.Label(self.root, text='Grade %', background='white', padx=10, pady=10).grid(row=i, column=4)
 
-        for i in range(self.num):
-            mark = tk.Entry(self.root, bg='orange', justify='center')
-            mark.grid(row=i, column=5)
-            print(type(mark))
-            self.marks.append(mark)
+        k = 0
+        for ass in self.assignments:
+            ass.mark = tk.Entry(self.root, bg='orange', justify='center')
+            ass.mark.grid(row=k, column=5)
+            k+=1
 
         #calculate the average button
         self.avg_button.destroy()
@@ -65,6 +74,10 @@ class GUI:
 
     def delField(self):
         self.num -= 1
+        temp = self.assignments.pop()
+        temp.name.destroy()
+        temp.weight.destroy()
+        temp.mark.destroy()
         self.setup_window()
 
     def create_print_text(self, avg, weightt):

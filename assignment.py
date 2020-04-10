@@ -1,3 +1,5 @@
+import tkinter as tk
+
 class Assignment:
 	
 	"""
@@ -6,10 +8,10 @@ class Assignment:
 		- Weight in decimal. float [0,1]
 		- Mark in percent, float [0,100]
 	"""
-	def __init__(self, name, weight):
+	def __init__(self, root, name=None, weight=None, mark=None):
 		self.name = name
-		self.weight = weight
-		self.mark = None
+		self.weight = tk.Entry(root, bg='orange')
+		self.mark = mark
 
 	def getName(self):
 		return self.name
